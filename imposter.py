@@ -25,6 +25,7 @@ def main():
     secret = generate_word(theme)
     
     first, second, third = random_three()
+
     send_email(first, secret)
     send_email(second, secret)
     send_email(third, secret)
@@ -33,15 +34,17 @@ def main():
 
 def random_three():
     rand = random.randint(1, 4)
-    keys = tuple(key for key in emails.values() if key != rand)
-    return keys
+    first, second, third = tuple(key for key in emails.keys() if key != rand)
+
+    listEmails = tuple([emails[first], emails[second], emails[third]])
+    return listEmails
 
 def send_email(reciever, word):
     server = smtplib.SMTP("smtp.gmail.com",587)
     server.starttls()
     server.login(Sam, emailKey)
     server.sendmail(Sam, reciever, word)
-    print("The word has been sent to " + reciever)
+    print("An email has been sent")
 
 def generate_word(theme):
     
