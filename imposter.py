@@ -7,21 +7,26 @@ import smtplib
 load_dotenv()
 
 emailKey = os.getenv("GMAIL_KEY")
-SAMemail = os.getenv("SAMARTH_MAIL")
+Sam = os.getenv("SAMARTH_MAIL")
+Abhiram = os.getenv("ABHIRAM_MAIL")
+Pavan = os.getenv("PAVAN_MAIL")
+Anay = os.getenv("ANAY_MAIL")
 
 def main():
     theme = "Disney Characters"
     secret = generate_word(theme)
-    send_email(SAMemail, secret)
+    send_email(Sam, secret)
 
 
+def random_three():
+    print("hi")
 
 def send_email(reciever, word):
     server = smtplib.SMTP("smtp.gmail.com",587)
     server.starttls()
-    server.login(SAMemail, emailKey)
-    server.sendmail(SAMemail, reciever, word)
-    return("The word has been sent to " + reciever)
+    server.login(Sam, emailKey)
+    server.sendmail(Sam, reciever, word)
+    print("The word has been sent to " + reciever)
 
 def generate_word(theme):
     
