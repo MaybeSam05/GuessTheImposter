@@ -2,21 +2,26 @@ import openai
 from dotenv import load_dotenv
 import sys
 import os
+import smtplib
 
 load_dotenv()
+
+emailKey = os.getenv("GMAIL_KEY")
+SAMemail = os.getenv("SAMARTH_MAIL")
 
 def main():
     theme = "Disney Characters"
     secret = generate_word(theme)
+    send_email(SAMemail, secret)
 
 
 
 def send_email(reciever, word):
     server = smtplib.SMTP("smtp.gmail.com",587)
     server.starttls()
-    server.login(email, secret.GMAIL_KEY)
-    server.sendmail(email, reciever, word)
-    return("The weather report has been sent to " + reciever)
+    server.login(SAMemail, emailKey)
+    server.sendmail(SAMemail, reciever, word)
+    return("The word has been sent to " + reciever)
 
 def generate_word(theme):
     
