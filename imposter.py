@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 import sys
 import os
 import smtplib
+import random
 
 load_dotenv()
 
@@ -12,14 +13,28 @@ Abhiram = os.getenv("ABHIRAM_MAIL")
 Pavan = os.getenv("PAVAN_MAIL")
 Anay = os.getenv("ANAY_MAIL")
 
+emails = {
+        1 : Sam,
+        2 : Abhiram,
+        3 : Pavan,
+        4 : Anay
+    }
+
 def main():
     theme = "Disney Characters"
     secret = generate_word(theme)
-    send_email(Sam, secret)
+    
+    first, second, third = random_three()
+    send_email(first, secret)
+    send_email(second, secret)
+    send_email(third, secret)
 
+    print("Emails have been sent to three random people")
 
 def random_three():
-    print("hi")
+    rand = random.randint(1, 4)
+    keys = tuple(key for key in emails.values() if key != rand)
+    return keys
 
 def send_email(reciever, word):
     server = smtplib.SMTP("smtp.gmail.com",587)
