@@ -1,16 +1,22 @@
 import openai
 from dotenv import load_dotenv
 import sys
+import os
 
 load_dotenv()
 
 def main():
     theme = "Disney Characters"
-    print(generate_word(theme))
+    secret = generate_word(theme)
 
 
 
-
+def send_email(reciever, word):
+    server = smtplib.SMTP("smtp.gmail.com",587)
+    server.starttls()
+    server.login(email, secret.GMAIL_KEY)
+    server.sendmail(email, reciever, word)
+    return("The weather report has been sent to " + reciever)
 
 def generate_word(theme):
     
