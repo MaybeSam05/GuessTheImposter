@@ -45,7 +45,7 @@ def send_email(reciever, word):
 
 def generate_word(theme):
     
-    message = f"Generate a word related to the theme. Respond ONLY with the word. For example if the theme is 'Pixar Movies', then a valid word would be 'Cars 2'. "
+    message = f"Generate a word related to the theme. Respond ONLY with the word. For example if the theme is 'Pixar Movies', then a valid word would be 'Cars 2'. Make sure to make it random, don't just pick the most popular option."
     message += f"The theme is: {theme}."
 
     response = openai.chat.completions.create(
