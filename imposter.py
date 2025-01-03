@@ -8,27 +8,27 @@ import random
 load_dotenv()
 
 emailKey = os.getenv("GMAIL_KEY")
-Sam = os.getenv("SAMARTH_MAIL")
-Abhiram = os.getenv("ABHIRAM_MAIL")
-Pavan = os.getenv("PAVAN_MAIL")
-Anay = os.getenv("ANAY_MAIL")
+player1 = os.getenv("PLAYER1_MAIL")
+player2 = os.getenv("PLAYER2_MAIL")
+player3 = os.getenv("PLAYER3_MAIL")
+player4 = os.getenv("PLAYER4_MAIL")
 
 emails = {
-        1 : Sam,
-        2 : Abhiram,
-        3 : Pavan,
-        4 : Anay
+        1 : player1,
+        2 : player2,
+        3 : player3,
+        4 : player4
     }
 
 def main():
     theme = input("What's the theme? ")
-    secret = generate_word(theme)
+    word = generate_word(theme)
     
     first, second, third = random_three()
 
-    send_email(first, secret)
-    send_email(second, secret)
-    send_email(third, secret)
+    send_email(first, word)
+    send_email(second, word)
+    send_email(third, word)
 
     print("Emails have been sent to three random people")
 
@@ -42,8 +42,8 @@ def random_three():
 def send_email(reciever, word):
     server = smtplib.SMTP("smtp.gmail.com",587)
     server.starttls()
-    server.login(Sam, emailKey)
-    server.sendmail(Sam, reciever, word)
+    server.login(player1, emailKey)
+    server.sendmail(player1, reciever, word)
     print("An email has been sent")
 
 def generate_word(theme):
