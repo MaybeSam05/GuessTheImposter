@@ -57,7 +57,8 @@ def generate_word(theme):
         model="gpt-4o-mini",
         messages=[ 
         {"role": "system", "content": system},
-        {"role": "user", "content": message} ]
+        {"role": "user", "content": message} ],
+        temperature=1.5
     )
 
     resp = response.choices[0].message.content
