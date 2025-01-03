@@ -48,12 +48,15 @@ def send_email(reciever, word):
 
 def generate_word(theme):
     
-    message = f"Generate a word related to the theme. Respond ONLY with the word. For example if the theme is 'Pixar Movies', then a valid word would be 'Cars 2'. Make sure to make it random, don't just pick the most popular option."
+    system = "You will be asked to generate a RANDOM word based on a theme provided by the user. Make sure to randomly pick from the theme. DO NOT pick the same option."
+
+    message = f"Generate a word related to the theme. Respond ONLY with the word. For example if the theme is 'Pixar Movies', then a valid word would be 'Cars 2'. Make sure to make it random, don't just pick the most popular option. Dont provide words you've provided in the past"
     message += f"The theme is: {theme}."
 
     response = openai.chat.completions.create(
         model="gpt-4o-mini",
         messages=[ 
+        {"role": "system", "content": system},
         {"role": "user", "content": message} ]
     )
 
