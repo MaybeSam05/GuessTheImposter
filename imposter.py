@@ -21,7 +21,7 @@ emails = {
     }
 
 def main():
-    theme = "Disney Characters"
+    theme = input("What's the theme? ")
     secret = generate_word(theme)
     
     first, second, third = random_three()
