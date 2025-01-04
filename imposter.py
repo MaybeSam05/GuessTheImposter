@@ -21,16 +21,28 @@ emails = {
     }
 
 def main():
+    usedwords = ""
     theme = input("What's the theme? ")
-    word = generate_word(theme)
     
-    first, second, third = random_three()
+    while (True):
 
-    send_email(first, word)
-    send_email(second, word)
-    send_email(third, word)
+        word = generate_word(theme, usedwords)
+        usedwords += f"{word}, "
 
-    print("Emails have been sent to three random people")
+        first, second, third = random_three()
+
+        send_email(first, word)
+        send_email(second, word)
+        send_email(third, word)
+
+        print("Emails have been sent to three random people")
+
+        again = input("\nWould you like to play again?\n'Y' = Change Theme\n'N' - Stop\nAnything else - Continue Playing\n")
+
+        if again == "Y":
+            main()
+        if again == "N":
+            sys.exit()
 
 def random_three():
     rand = random.randint(1, 4)
@@ -46,19 +58,18 @@ def send_email(reciever, word):
     server.sendmail(player1, reciever, word)
     print("An email has been sent")
 
-def generate_word(theme):
+def generate_word(theme, used):
     
-    system = "You will be asked to generate a RANDOM word based on a theme provided by the user. Make sure to randomly pick from the theme. DO NOT pick the same option."
+    system = "You will be asked to generate a RANDOM word based on a theme provided by the user."
 
-    message = f"Generate a word related to the theme. Respond ONLY with the word. For example if the theme is 'Pixar Movies', then a valid word would be 'Cars 2'. Make sure to make it random, don't just pick the most popular option. Dont provide words you've provided in the past"
+    message = f"Generate a word related to the theme. Respond ONLY with the word. For example if the theme is 'Pixar Movies', then a valid word would be 'Cars 2'. You are not allowed to say: {used}"
     message += f"The theme is: {theme}."
 
     response = openai.chat.completions.create(
         model="gpt-4o-mini",
         messages=[ 
         {"role": "system", "content": system},
-        {"role": "user", "content": message} ],
-        temperature=1.5
+        {"role": "user", "content": message} ]
     )
 
     resp = response.choices[0].message.content
