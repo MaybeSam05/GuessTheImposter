@@ -55,7 +55,8 @@ def send_email(reciever, word):
     server = smtplib.SMTP("smtp.gmail.com",587)
     server.starttls()
     server.login(player1, emailKey)
-    server.sendmail(player1, reciever, word)
+    text = f"Subject: Guess The Imposter Game\n\nThe secret word is: {word}"
+    server.sendmail(player1, reciever, text)
     print("An email has been sent")
 
 def generate_word(theme, used):
