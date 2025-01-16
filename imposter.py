@@ -61,7 +61,7 @@ def send_email(reciever, word):
 
 def generate_word(theme, used):
     
-    system = "You will be asked to generate a RANDOM word based on a theme provided by the user."
+    #system = "You will be asked to generate a RANDOM word based on a theme provided by the user."
 
     message = f"Generate a word related to the theme. Respond ONLY with the word. For example if the theme is 'Pixar Movies', then a valid word would be 'Cars 2'. You are not allowed to say: {used}"
     message += f"The theme is: {theme}."
@@ -69,7 +69,7 @@ def generate_word(theme, used):
     response = openai.chat.completions.create(
         model="gpt-4o-mini",
         messages=[ 
-        {"role": "system", "content": system},
+        #{"role": "system", "content": system},
         {"role": "user", "content": message} ]
     )
 
